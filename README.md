@@ -35,9 +35,6 @@ setelah directory kita terbuka, maka kita jalankan command
 git clone <link repo git kita>
 ```
 
-pada case ini, saya contohkan clone repo claimq 
-
-
 ### **Branch**
 Untuk contoh, saya ambil untuk contoh ClaimQ, kami, punya branch dev, dimana codingan utama disimpan. Dari branch dev ini nantilah, kami masing2 developer buat branch sendiri, yang meng-copy dari branch dev ini. Lalu, developer A, mendapatkan tugas untuk mengerjakan fitur dashboard testing. Apa yang perlu dilakukan developer A?
 
@@ -246,5 +243,8 @@ Setelah command berjalan, maka akan muncul pesan <code>SUCCESS: The process with
 
 Kembali ke [daftar isi](#daftar-isi)
 
+#### **Kesimpulan**
 
-
+<ol>
+<li>Pembuatan branch backup setiap merging itu hanyalah pencegahan, jika sudah pede bahwa conflict ketika merge tidak banyak(setiap merge pasti ada conflict ya), silahkan gas untuk merge dari branch utama ke branch masing2 fitur ya.</li>
+</ol>
