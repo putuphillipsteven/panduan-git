@@ -1,4 +1,4 @@
-# **Migrasi**
+# **Panduan Git**
 
 ## **Perjanjian Baru**
 
