@@ -6,7 +6,7 @@
 
 1. [Apa itu repository](#repository)
 1. [Apa itu branch](#branch)
-1. [Cara menjalankan aplikasi](#cara-run-aplikasi)
+1. [Cara menjalankan aplikasi](#cara-menjalankan-aplikasi)
 1. [Cara push kerjaan kita ke repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
 1. [Cara merge kerjaan ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
 1. [Kesimpulan](#kesimpulan)
