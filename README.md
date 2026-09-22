@@ -10,11 +10,11 @@
 1. [Cara push kerjaan kita ke repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
 1. [Cara merge kerjaan ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
 1. [Kesimpulan](#kesimpulan)
-1. [Daftar pustaka](#daftar-pustaka)
+1. [Void](#void)
 
 ### **Repository**
 
-Merupakan adalah tempat kita simpan kerjaan kita secara online. Repository ini(biasa disingkat repo) ini dapat dikerjakan secara bersamaan oleh banyak developer, tapi, kalo kita kerjain semua nya di tempat yang sama, bakalan tabrakan. Maka dari itu, ada sebuah fitur yang bernama **branch**. 
+Merupakan tempat kita simpan kerjaan kita secara online. Repository ini(biasa disingkat repo) ini dapat dikerjakan secara bersamaan oleh banyak developer, tapi, kalo kita kerjain semua nya di tempat yang sama, bakalan tabrakan. Maka dari itu, ada sebuah fitur yang bernama **branch**. 
 
 Namun, sebelum kita mulai mengerjakan, mari kita clone dulu repository yang sudah dibuat, ke pc kita masing-masing. Lalu, bagaimana [cara clone repository](#cara-clone-repository)?
 
@@ -45,7 +45,7 @@ Kenapa feat/dashboard-testing? karena, kami tim ClaimQ telah menyetujui rule nam
 <li>Melakukan merge dari branch utama(dalam case ini dev) ke <a href="#cara-merge-kerjaan-kita-ke-branch-utama">branch dia sendiri,</a>  namun, untuk pencegahan error, disarankan membuat satu <a href="#cara-membuat-branch-baru"></a>branch backup.
 </li>
 <li>Melakukan testing di branch backup nya sendiri setelah melakukan merge dengan branch utama.</li>
-<li>Setelah aman, maka developer A wajib menginfokan ke pic merging agar dapat merge branch backup ke branch master.</li>
+<li>Setelah aman, maka developer A wajib menginfokan ke pic merging agar dapat merge branch backup ke branch dev(branch utama dalam case ini).</li>
 </ol>
 
 Kembali ke [daftar isi](#daftar-isi)
@@ -142,7 +142,18 @@ Cara kita gabungkan kerjaan kita dari branch masing-masing ke branch utama(dalam
 
 Kembali ke [daftar isi](#daftar-isi)
 
-## **Daftar Pustaka**
+#### **Kesimpulan**
+
+<ol>
+<li>Pembuatan branch backup setiap merging itu hanyalah pencegahan, jika sudah pede bahwa conflict ketika merge tidak banyak(setiap merge pasti ada conflict ya), silahkan gas untuk merge dari branch utama ke branch masing2 fitur ya.</li>
+<li>
+Proses merge yang dijelaskan dalam case ini masih butuh banyak penyempurnaan, nantinya, akan ada tahap dimana jika ingin merge ke branch utama, harus melakukan pull request terlebih dahulu, namun akan dipelajari lebih dalam terlebih dahulu. Jika sudah ada yang mengetahui cara membuat fitur pull request atau cara merge yang lebih simple, silahkan infokan ya. Boleh juga langsung buat branch baru, nanti infokan ke saya agar dimerge ke branch master. Terima kasih
+</li>
+</ol>
+
+Kembali ke [daftar isi](#daftar-isi)
+
+## **Void**
 
 #### **Cara merge kerjaan kita ke branch utama**
 
@@ -243,8 +254,4 @@ Setelah command berjalan, maka akan muncul pesan <code>SUCCESS: The process with
 
 Kembali ke [daftar isi](#daftar-isi)
 
-#### **Kesimpulan**
 
-<ol>
-<li>Pembuatan branch backup setiap merging itu hanyalah pencegahan, jika sudah pede bahwa conflict ketika merge tidak banyak(setiap merge pasti ada conflict ya), silahkan gas untuk merge dari branch utama ke branch masing2 fitur ya.</li>
-</ol>
