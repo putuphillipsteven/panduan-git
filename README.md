@@ -1,257 +1,401 @@
-# **Panduan Git**
+# Panduan Git
 
-## **Perjanjian Baru**
+## Perjanjian Baru
 
-### **Daftar Isi**
+### Daftar Isi
 
-1. [Apa itu repository](#repository)
-1. [Apa itu branch](#branch)
-1. [Cara menjalankan aplikasi](#cara-menjalankan-aplikasi)
-1. [Cara push kerjaan kita ke repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
-1. [Cara merge kerjaan ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
-1. [Kesimpulan](#kesimpulan)
-1. [Void](#void)
+- [Panduan Git](#panduan-git)
+  - [Perjanjian Baru](#perjanjian-baru)
+    - [Daftar Isi](#daftar-isi)
+    - [Repository](#repository)
+    - [Cara clone repository](#cara-clone-repository)
+    - [Branch](#branch)
+    - [Cara membuat branch baru](#cara-membuat-branch-baru)
+    - [Cara menjalankan aplikasi](#cara-menjalankan-aplikasi)
+      - [Menjalankan Back End](#menjalankan-back-end)
+      - [Menjalankan Front End](#menjalankan-front-end)
+    - [Cara merge branch](#cara-merge-branch)
+    - [Cara merge kerjaan kita ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
+    - [Cara merge kerjaan ke branch utama v2](#cara-merge-kerjaan-ke-branch-utama-v2)
+    - [Cara push kerjaan kita dari local ke branch kita di repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
+    - [Cara membuka terminal baru](#cara-membuka-terminal-baru)
+    - [Cara membuka directory](#cara-membuka-directory)
+    - [Cara matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend)
+    - [Kesimpulan](#kesimpulan)
 
-### **Repository**
+---
 
-Merupakan tempat kita simpan kerjaan kita secara online. Repository ini(biasa disingkat repo) ini dapat dikerjakan secara bersamaan oleh banyak developer, tapi, kalo kita kerjain semua nya di tempat yang sama, bakalan tabrakan. Maka dari itu, ada sebuah fitur yang bernama **branch**. 
+### Repository
 
-Namun, sebelum kita mulai mengerjakan, mari kita clone dulu repository yang sudah dibuat, ke pc kita masing-masing. Lalu, bagaimana [cara clone repository](#cara-clone-repository)?
+Merupakan tempat kita simpan kerjaan kita secara online. Repository ini (biasa disingkat repo) dapat dikerjakan secara bersamaan oleh banyak developer, tapi kalau kita kerjakan semuanya di tempat yang sama, bakalan tabrakan. Maka dari itu, ada sebuah fitur yang bernama **branch**.
 
-Kembali ke [daftar isi](#daftar-isi)
+Namun, sebelum kita mulai mengerjakan, mari kita clone dulu repository yang sudah dibuat ke PC kita masing-masing. Lalu, bagaimana [cara clone repository](#cara-clone-repository)?
 
-### **Cara clone repository**
+[Kembali ke daftar isi](#daftar-isi)
 
-Simple aja, buat directory dimana kita ingin clone repository kita itu. Jangan buat directory di locak disk C ya, buat di local disk D. Dari claimq, rule naming nama folder tempat repository ingin di clone adalah
+---
+
+### Cara clone repository
+
+Simple aja, buat directory di mana kita ingin clone repository kita. **Jangan buat directory di local disk C, buat di local disk D.** Dari ClaimQ, rule penamaan folder tempat repository di-clone adalah:
+
 ```
-[nama-developer-migrasi] 
-contoh : john-doe-migrasi
-```
-Lalu, kita [buka directory](#cara-membuka-directory) tempat kita itu dari 
-`git bash` di aplikasi visual studio code.
+[nama-developer]-migrasi
 
-setelah directory kita terbuka, maka kita jalankan command 
+contoh: john-doe-migrasi
 ```
+
+Lalu, kita [buka directory](#cara-membuka-directory) tersebut dari `git bash` di aplikasi Visual Studio Code.
+
+Setelah directory kita terbuka, jalankan command:
+
+```bash
 git clone <link repo git kita>
 ```
 
-### **Branch**
-Untuk contoh, saya ambil untuk contoh ClaimQ, kami, punya branch dev, dimana codingan utama disimpan. Dari branch dev ini nantilah, kami masing2 developer buat branch sendiri, yang meng-copy dari branch dev ini. Lalu, developer A, mendapatkan tugas untuk mengerjakan fitur dashboard testing. Apa yang perlu dilakukan developer A?
+[Kembali ke daftar isi](#daftar-isi)
 
-<ol>
-<li>Membuat branch baru dengan nama <code>feat/dashboard-testing</code>.
-Kenapa feat/dashboard-testing? karena, kami tim ClaimQ telah menyetujui rule naming branch ini. Feat itu adalah singkatan dari feature. Nantinya, akan ada rule naming lain yang ada peraturannya, namun, karna ini migrasi, kita anggap saja semua itu adalah fitur ya. Bagaimana <a href="#cara-membuat-branch-baru">cara membuat branch baru</a> ?
-<li>Lalu, setelah developer A mengerjakan semua fiturnya, maka Ia harus <a href="#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository">push kerjaan</a> dia ke branch dia sendiri.</li>
-<li>Melakukan merge dari branch utama(dalam case ini dev) ke <a href="#cara-merge-kerjaan-kita-ke-branch-utama">branch dia sendiri,</a>  namun, untuk pencegahan error, disarankan membuat satu <a href="#cara-membuat-branch-baru"></a>branch backup.
-</li>
-<li>Melakukan testing di branch backup nya sendiri setelah melakukan merge dengan branch utama.</li>
-<li>Setelah aman, maka developer A wajib menginfokan ke pic merging agar dapat merge branch backup ke branch dev(branch utama dalam case ini).</li>
-</ol>
+---
 
-Kembali ke [daftar isi](#daftar-isi)
+### Branch
 
-### **Cara membuat branch baru**
+Sebagai contoh, saya ambil case ClaimQ. Kami punya branch `dev`, di mana codingan utama disimpan. Dari branch `dev` inilah masing-masing developer membuat branch sendiri, yang meng-copy dari branch `dev`.
 
-Kita buka branch utama kita, di contoh ini, itu adalah branch `dev`. Maka, branch yang terbuka di terminal git bash kita adalah branch `dev`.
+Misalnya developer A mendapat tugas mengerjakan fitur dashboard testing. Apa yang perlu dilakukan developer A?
 
-Pastikan anda telah di directory yang benar ya. Maksudnya directory yang benar itu apa? Coba kita buka repo di github webnya.
+1. Membuat branch baru dengan nama `feat/dashboard-testing`.
 
-![alt text](./src/img/image-4.png)
+   Kenapa `feat/dashboard-testing`? Karena tim ClaimQ telah menyetujui rule penamaan branch ini. `feat` adalah singkatan dari *feature*. Nantinya akan ada rule penamaan lain, namun karena ini migrasi, kita anggap semuanya adalah fitur. Lihat [cara membuat branch baru](#cara-membuat-branch-baru).
 
-Yang ditandai merah, itu adalah directory terluar kita. Lalu, coba kita check directory yang terbuka pada vs-code kita.
+2. Setelah developer A mengerjakan semua fiturnya, ia harus [push kerjaannya](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository) ke branch dia sendiri.
 
-![alt text](./src/img/image-6.png)
+3. Melakukan [merge dari branch utama](#cara-merge-kerjaan-kita-ke-branch-utama) (dalam case ini `dev`) ke branch dia sendiri. Untuk pencegahan error, disarankan membuat satu [branch backup](#cara-membuat-branch-baru).
 
-Jika directory yang kita buka sudah sama dengan yang ada di directory terluar di repo git web, maka kita sudah berada di jalan yang benar.
+4. Melakukan testing di branch backup-nya sendiri setelah melakukan merge dengan branch utama.
 
-Setelah kita berada di directory yang benar, kita juga harus memastikan kita berada di branch yang benar.
-![alt text](./src/img/image-7.png)
+5. Setelah aman, developer A **wajib** menginfokan ke PIC merging agar branch backup dapat di-merge ke branch `dev` (branch utama dalam case ini).
 
-Yang ditandai merah adalah tanda branch yang sedang kita buka. Di case ini, branch yang sedang dibuka adalah branch `dev`, dan branch baru yang ingin dibuat memang ingin dicopy dari branch `dev` karna di case ini, branch dev menjadi acuan utama.
+[Kembali ke daftar isi](#daftar-isi)
 
-Sekarang, kita perlu mengetikkan command di terminal git bash kita, dengan command
-```
+---
+
+### Cara membuat branch baru
+
+Buka branch utama kita, di contoh ini branch `dev`. Maka, branch yang terbuka di terminal git bash kita adalah branch `dev`.
+
+Pastikan kamu sudah berada di **directory yang benar**. Maksudnya apa? Coba buka repo di GitHub web-nya.
+
+![Directory terluar repo di GitHub](./src/img/image-4.png)
+
+Yang ditandai merah adalah directory terluar kita. Lalu, cek directory yang terbuka di VS Code.
+
+![Directory yang terbuka di VS Code](./src/img/image-6.png)
+
+Jika directory yang kita buka sudah sama dengan directory terluar di repo GitHub web, berarti kita sudah berada di jalan yang benar.
+
+Setelah berada di directory yang benar, pastikan juga kita berada di **branch yang benar**.
+
+![Branch yang sedang dibuka](./src/img/image-7.png)
+
+Yang ditandai merah adalah branch yang sedang dibuka. Di case ini branch yang terbuka adalah `dev`, dan branch baru memang ingin di-copy dari `dev` karena `dev` menjadi acuan utama.
+
+Sekarang, ketikkan command berikut di terminal git bash:
+
+```bash
 git checkout -b feat/dashboard-testing
 ```
-Jangan lupa, rule naming penamaan branch harus disepakati di awal ya.
 
-![alt text](./src/img/image-8.png)
+> Jangan lupa, rule penamaan branch harus disepakati di awal.
 
-Setelah branch berhasil dibuat, maka akan muncul pesan seperti diatas, dan nama branch yang sedang dibuka sudah berubah. Selamat, anda telah berhasil membuat branch baru. Langkah selanjutnya, kita akan mempelajari [cara run aplikasi](#cara-run-aplikasi) di pc kita masing-masing
+![Branch baru berhasil dibuat](./src/img/image-8.png)
 
-Kembali ke [daftar isi](#daftar-isi)
+Setelah branch berhasil dibuat, akan muncul pesan seperti di atas, dan nama branch yang sedang dibuka sudah berubah. Selamat, kamu berhasil membuat branch baru!
 
-### **Cara menjalankan aplikasi**
+Langkah selanjutnya, kita pelajari [cara menjalankan aplikasi](#cara-menjalankan-aplikasi) di PC masing-masing.
 
-Untuk run aplikasi, kita harus dan [menjalankan backend](#menjalankan-back-end) dan [frontend](#menjalankan-front-end) aplikasi kita.
+[Kembali ke daftar isi](#daftar-isi)
 
-#### **Menjalankan Back End**
+---
 
-Untuk menjalankan back end, kita harus membuka directory back end aplikasi kita sendiri. List langkahnya adalah : 
+### Cara menjalankan aplikasi
 
-<ol>
-<li>
-<a href="#cara-membuka-terminal-baru">Membuka terminal</a> git-bash baru pada vs-code
-</li>
-<li><a href="#cara-membuka-directory">Membuka directory</a> backend aplikasi kita. Directory backend masing2 tim berbeda, untuk contoh case ini, saya contohkan membuka directory backend claimq</li>
+Untuk menjalankan aplikasi, kita harus menjalankan [backend](#menjalankan-back-end) dan [frontend](#menjalankan-front-end).
 
-![alt text](./src/img/image-14.png)
+#### Menjalankan Back End
 
+1. [Buka terminal](#cara-membuka-terminal-baru) git bash baru di VS Code.
 
-<li>Setelah berhasil masuk directory, maka kita perlu menjalankan command <pre><code>CLAIMQ_ENV=DEV go run ./cmd/claimq</code></pre></li>
-<li>Jika berhasil, maka akan muncul seperti gambar dibawah ini</li>
+2. [Buka directory](#cara-membuka-directory) backend aplikasi kita. Directory backend tiap tim berbeda; di contoh ini, directory backend ClaimQ.
 
-![alt text](./src/img/image-17.png)
-<li>Jika muncul pesan bahwa ada port backend lain yang sedang berjalan, maka silahkan <a href="#cara-matikan-paksa-terminal-backend">matikan paksa terminal backend</a></li>
-</ol>
+   ![Directory backend ClaimQ](./src/img/image-14.png)
 
-Kembali ke [daftar isi](#daftar-isi)
+3. Setelah berhasil masuk directory, jalankan command:
 
-#### **Menjalankan Front End**
+   ```bash
+   CLAIMQ_ENV=DEV go run ./cmd/claimq
+   ```
 
-<ol>
-<li>
-<a href="#cara-membuka-terminal-baru">Membuka terminal</a> git-bash baru pada vs-code
-</li>
-<li><a href="#cara-membuka-directory">Membuka directory</a> frontend aplikasi kita. Directory frontend masing2 tim berbeda, untuk contoh case ini, saya contohkan membuka directory frontend claimq</li>
+4. Jika berhasil, akan muncul tampilan seperti ini:
 
-![alt text](./src/img/image-18.png)
-<li>Saat pertama kali kita ingin menjalankan front end, maka kita harus install dependencies front end terlebih dahulu dengan command <code>npm install</code> pada directory front end kita. Jika npm install berhasil, maka akan muncul tampilan seperti dibawah ini.</li>
+   ![Backend berhasil berjalan](./src/img/image-17.png)
 
-![alt text](./src/img/image-19.png)
-Perlu diingat bahwa npm install ini hanya perlu dijalankan ketika awal clone, dan jika ada dependencies baru yang ditambahkan pada aplikasi kita.
-<li>Setelah berhasil install, maka kita perlu menjalankan command <code>npm run dev</code>. 
-Jika sukses maka akan muncul tampilan seperti berikut :
+5. Jika muncul pesan bahwa ada port backend lain yang sedang berjalan, silakan [matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend).
 
-![alt text](./src/img/image-20.png)
+[Kembali ke daftar isi](#daftar-isi)
 
-Link local yang muncul pada terminal adalah link frontend aplikasi pada pc kita.
+#### Menjalankan Front End
 
-![alt text](./src/img/image-21.png)
-</li>
-</ol>
+1. [Buka terminal](#cara-membuka-terminal-baru) git bash baru di VS Code.
 
-Kembali ke [daftar isi](#daftar-isi)
+2. [Buka directory](#cara-membuka-directory) frontend aplikasi kita. Directory frontend tiap tim berbeda; di contoh ini, directory frontend ClaimQ.
 
-### **Cara merge branch**
+   ![Directory frontend ClaimQ](./src/img/image-18.png)
 
-Cara kita gabungkan kerjaan kita dari branch masing-masing ke branch utama(dalam contoh case ini, adalah branch dev), adalah dengan cara berikut : 
-<ol>
-<li>Pertama-tama, [kita harus memastikan](#cara-memastikan-kerjaan-sudah-di-push) bahwa kerjaan kita sudah kita push ke branch kita sendiri.</li>
-</ol>
+3. Saat pertama kali menjalankan frontend, install dependencies terlebih dahulu di directory frontend:
 
-Kembali ke [daftar isi](#daftar-isi)
+   ```bash
+   npm install
+   ```
 
-#### **Kesimpulan**
+   Jika berhasil, akan muncul tampilan seperti ini:
 
-<ol>
-<li>Pembuatan branch backup setiap merging itu hanyalah pencegahan, jika sudah pede bahwa conflict ketika merge tidak banyak(setiap merge pasti ada conflict ya), silahkan gas untuk merge dari branch utama ke branch masing2 fitur ya.</li>
-<li>
-Proses merge yang dijelaskan dalam case ini masih butuh banyak penyempurnaan, nantinya, akan ada tahap dimana jika ingin merge ke branch utama, harus melakukan pull request terlebih dahulu, namun akan dipelajari lebih dalam terlebih dahulu. Jika sudah ada yang mengetahui cara membuat fitur pull request atau cara merge yang lebih simple, silahkan infokan ya. Boleh juga langsung buat branch baru, nanti infokan ke saya agar dimerge ke branch master. Terima kasih
-</li>
-</ol>
+   ![npm install berhasil](./src/img/image-19.png)
 
-Kembali ke [daftar isi](#daftar-isi)
+   > `npm install` hanya perlu dijalankan saat awal clone, dan jika ada dependencies baru yang ditambahkan ke aplikasi.
 
-## **Void**
+4. Setelah berhasil install, jalankan:
 
-#### **Cara merge kerjaan kita ke branch utama**
+   ```bash
+   npm run dev
+   ```
 
-<ol>
-<li>Yang pertama, kita harus memastikan kerjaan di local kita sudah <a href="#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository">ter-push</a> dengan baik di branch repo</li>
-<li>Jika sudah, mari kita pindah branch ke branch utama kita, dalam case ini, branch dev. Kita jalankan dengan command <pre><code>git checkout [nama branch yang dituju]</code></pre>
+   Jika sukses, akan muncul tampilan seperti ini:
 
-![alt text](./src/img/image-27.png)
+   ![npm run dev berhasil](./src/img/image-20.png)
 
-Jika berhasil, maka nama branch yang muncul pun akan berubah sesuai dengan nama branch yang kita tuju.
-</li>
-<li>Setelah berhasil pindah branch, kita perlu ambil file terbaru dari branch utama yang ada di repo kita(karna siapa tau sudah ada fitur baru di branch utama kita berkerja), kita perlu menjalankan command <pre><code>git pull origin</code></pre></li>
+   Link local yang muncul di terminal adalah link frontend aplikasi di PC kita.
 
-![alt text](./src/img/image-28.png)
+   ![Frontend di browser](./src/img/image-21.png)
 
-Ini , contoh kalau ada fitur baru di branch dev. 
-<li>Setelah berhasil git pull origin, kita perlu pindah lagi ke branch yang ingin kita tambahkan fitur nya ke branch utama. Kenapa perlu bolak-balik? Ini murni hanya pencegahan kami agar branch utama, itu selalu aman dari error setelah merge, jadi cara yang dilakukan adalah, menggabungkan branch utama, ke branch yang ingin kita tambahkan fiturnya(dalam hal ini, fitur dashboard-testing), namun ada pencegahan lagi yang perlu dilakukan yaitu dengan membuat branch backup baru dari branch yang ingin kita gabungkan ke branch utama. Biasanya, nama branch backup nya kami tambahkan -backup dibelakang nama branch asli, contohnya adalah <code>feat/dashboard-testing-backup</code></li>.Perlu diingat bahwa branch bakcup harus merupakan copyan dari branch yang ingin kita tambahkan fiturnya. Dalam case ini, branch <code>feat/dashboard-testing-backup</code> harus dibuat ketika kita membuka branch aslinya yaitu <code>feat/dashboard-testing</code>. Cara membuat branch baru silahkan dicek di <a href="#cara-membuat-branch-baru">sini</a>. 
-<li>Setelah berhasil membuat branch backup, maka kita merge branch utama ke branch backup ini dengan command <pre><code>git merge [nama branch utama]</code></pre></li>
+[Kembali ke daftar isi](#daftar-isi)
 
-![alt text](./src/img/image-29.png)
-Setelah berhasil, kita perlu memastikan juga bahwa merge kita ini berjalan dengan baik dengan cara menjalankan <a href="#cara-menjalankan-aplikasi"> aplikasi kita</a>. Dicek apakah semua fitur berjalan dengan baik(silahkan komunikasikan dengan tim, tanyakan apakah fiturnya ada yang hilang atau tidak). Jika sudah, silahkan di push hasil merge tadi di branch backup(karna tadi kita memang sudah pindah ke branch backup). 
-<li>
+---
 
-> **⚠️ Penting:** Langkah ini wajib dilakukan oleh **PIC MERGE REPOSITORY masing masing tim**
+### Cara merge branch
 
+Cara menggabungkan kerjaan dari branch masing-masing ke branch utama (dalam contoh ini branch `dev`):
 
-Setelah berhasil, langkah terakhir adalah kita pindah ke branch utama, lalu merge branch backup tadi ke branch utama(harap <code>git pull origin terlebih dahulu</code> agar memastikan tidak ada file yang baru setelah kita melakukan merge ke branch backup tadi. Jika setelah git pull origin ternyata ada file baru, perlu ditanyakan kepada tim kenapa ada file baru setelah proses merge kita tadi :) ).</li>
-</ol>
+1. Pastikan kerjaan kita sudah di-[push](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository) ke branch kita sendiri.
+2. Lanjutkan ke [cara merge kerjaan kita ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama).
 
-Kembali ke [daftar isi](#daftar-isi)
+[Kembali ke daftar isi](#daftar-isi)
 
-#### **Cara push kerjaan kita dari local ke branch kita di repository**
-<ol>
-<li>Anggap kita sudah melakukan penambahan satu fitur, kita coba cek dengan command <pre><code>git status</code></pre></li>
+---
 
-![alt text](./src/img/image-23.png)
-Nama file yang muncul, adalah file yang berubah, ditambahkan, dihapus, apapun itu. Langkah selanjutnya yang diperlukan adalah, kita jalankan command <pre><code>git add .</code></pre> Simplenya, git add . ini ngasih tau ke si git kalo semua perubahan yang ada di local ini, mau kita push ke repo kita.
-<li>Setelah add, kita perlu menjalankan command <pre><code>git commit -m "ini diisi dengan pesan yang mau kita kirim, kayak apa yang kita perbuat, apa yang kita tambahkan, dll."</code></pre>
+### Cara merge kerjaan kita ke branch utama
 
-![alt text](./src/img/image-24.png)
+1. Pastikan kerjaan di local kita sudah [ter-push](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository) dengan baik ke branch di repo.
 
-<li>Setelah sudah kita commit, mari kita push dengan command <pre><code>git push</code></pre></li>
+2. Pindah ke branch utama (dalam case ini `dev`):
 
-![alt text](./src/img/image-25.png)
+   ```bash
+   git checkout [nama-branch-yang-dituju]
+   ```
 
-Namun, untuk push pertama kali pada branch baru yang kita buat, kita perlu menjalankan command <pre><code>git push --set-upstream origin <code>nama-branch-kita</code></code></pre>
+   ![Pindah branch](./src/img/image-27.png)
 
-Setelah berhasil, maka akan muncul tampilan seperti ini:
+   Jika berhasil, nama branch yang muncul akan berubah sesuai branch yang dituju.
 
-![alt text](./src/img/image-26.png)
-Next nya, karna kita udah pernah push, maka kita hanya perlu melakukan command <pre><code>git push</code></pre> setiap kita ingin push kerjaan kita ke branch kita di repository.
-</li>
-</ol>
+3. Ambil file terbaru dari branch utama di repo (siapa tahu sudah ada fitur baru):
 
-Kembali ke [daftar isi](#daftar-isi)
+   ```bash
+   git pull origin
+   ```
 
-#### **Cara membuka terminal baru**
-<ol>
-<li>Klik launch profile disini</li>
+   ![Contoh ada fitur baru di branch dev](./src/img/image-28.png)
 
-![alt text](./src/img/image-9.png)
+   Ini contoh kalau ada fitur baru di branch `dev`.
 
-<li>Klik git bash</li>
+4. Pindah lagi ke branch fitur yang ingin kita gabungkan ke branch utama.
 
-![alt text](./src/img/image-10.png)
+   Kenapa perlu bolak-balik? Ini murni pencegahan agar branch utama selalu aman dari error setelah merge. Caranya: gabungkan branch utama **ke** branch fitur kita (dalam hal ini `feat/dashboard-testing`), tapi lewat **branch backup** dulu.
 
-Setelah sukses membuat terminal git-bash baru, maka akan muncul tampilan seperti dibawah.
+   Nama branch backup biasanya ditambahkan `-backup` di belakang nama branch asli, contohnya `feat/dashboard-testing-backup`.
 
-![alt text](./src/img/image-11.png)
-</ol>
+   > Branch backup **harus** di-copy dari branch fitur yang ingin digabungkan. Dalam case ini, `feat/dashboard-testing-backup` harus dibuat saat kita sedang membuka branch `feat/dashboard-testing`. Lihat [cara membuat branch baru](#cara-membuat-branch-baru).
 
-Kembali ke [daftar isi](#daftar-isi)
+5. Setelah branch backup dibuat, merge branch utama ke branch backup:
 
-#### **Cara membuka directory**
-<ol>
-<li>Ketikkan <code>cd nama-directory</code><pre><code>cd nama-directory</code></pre>. Untuk case ini, contohnya adalah membuka folder Bengkel di directory claimq. Maka, command yang diketikkan adalah <pre><code>cd Bengkel</code></pre></li>
+   ```bash
+   git merge [nama-branch-utama]
+   ```
 
-![alt text](./src/img/image-13.png)
-</ol>
+   ![Merge branch utama ke branch backup](./src/img/image-29.png)
 
-Kembali ke [daftar isi](#daftar-isi)
+   Setelah berhasil, pastikan merge berjalan dengan baik dengan [menjalankan aplikasi](#cara-menjalankan-aplikasi). Cek apakah semua fitur berjalan dengan baik (komunikasikan dengan tim, tanyakan apakah ada fitur yang hilang). Jika sudah aman, push hasil merge di branch backup.
 
-#### **Cara matikan paksa terminal backend**
+6. > **⚠️ Penting:** Langkah ini wajib dilakukan oleh **PIC MERGE REPOSITORY masing-masing tim**.
 
-<ol>
-<li> Kita check dulu apa aja yang sedang berjalan di terminal kita
-<pre><code>netstat -ano | grep LISTENING | grep -E ":(8080|5173)"</code></pre>
+   Pindah ke branch utama, lalu merge branch backup tadi ke branch utama. Sebelumnya, jalankan `git pull origin` terlebih dahulu untuk memastikan tidak ada file baru setelah kita merge ke branch backup. Jika ternyata ada file baru, tanyakan ke tim kenapa ada file baru setelah proses merge tadi. :)
 
-![alt text](./src/img/image-15.png) maka akan muncul list port yang sedang berjalan
-</li>
-<li>Matikan port yang sedang berjalan dengan command <pre><code>taskkill //PID <nomor-pid> //F</code></pre>
-<code>//PID</code> diganti dengan kode disamping LISTENING
+[Kembali ke daftar isi](#daftar-isi)
 
-![alt text](./src/img/image-16.png)
-Setelah command berjalan, maka akan muncul pesan <code>SUCCESS: The process with PID 16152 has been terminated.</code>
-</li>
-</ol>
+---
 
-Kembali ke [daftar isi](#daftar-isi)
+### Cara merge kerjaan ke branch utama v2
 
+1. Kita pastikan kerjaan di branch fitur kita sudah di [push semua](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository).
+2. Setelah itu, kita langsung 
+```bash
+git pull origin <nama branch yang nantinya akan kita merge>
+```
+Contoh : 
+```bash
+git pull origin dev
+```
 
+Selesaikan conflict yang terjadi(jika ada), lalu jangan lupa di [push kembali](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository).
+
+3. Setelah conflict ter-selesaikan, silahkan di run-ulang [back end](#menjalankan-back-end) dan [front end](#menjalankan-front-end) nya, dan pastikan semua aplikasi telah berjalan dengan baik ya.
+4. Jika sudah aman, mari kita buka repo kita di web, lalu klik tab pull request.
+
+![alt text](./src/img/github-repo.png)
+
+5. Klik new pull request(sebenarnya, kalau kita baru push kerjaan kita, biasanya git langsung nyaranin compare & pull request kok, cuman, biar lebih jelas, kita klik new pull request aja).
+
+![alt text](./src/img/pull-request.png)
+
+6. Pada 
+
+![alt text](image.png)
+
+
+[Kembali ke daftar isi](#daftar-isi)
+
+---
+
+### Cara push kerjaan kita dari local ke branch kita di repository
+
+1. Anggap kita sudah menambahkan satu fitur. Cek perubahannya dengan:
+
+   ```bash
+   git status
+   ```
+
+   ![git status](./src/img/image-23.png)
+
+   Nama file yang muncul adalah file yang berubah, ditambahkan, atau dihapus. Selanjutnya jalankan:
+
+   ```bash
+   git add .
+   ```
+
+   Simpelnya, `git add .` memberi tahu git bahwa semua perubahan di local ini mau kita push ke repo.
+
+2. Setelah `add`, jalankan commit:
+
+   ```bash
+   git commit -m "isi dengan pesan tentang apa yang kita kerjakan, tambahkan, dll."
+   ```
+
+   ![git commit](./src/img/image-24.png)
+
+3. Setelah commit, push dengan:
+
+   ```bash
+   git push
+   ```
+
+   ![git push](./src/img/image-25.png)
+
+   Untuk push **pertama kali** di branch baru, jalankan:
+
+   ```bash
+   git push --set-upstream origin nama-branch-kita
+   ```
+
+   Jika berhasil, akan muncul tampilan seperti ini:
+
+   ![Push pertama berhasil](./src/img/image-26.png)
+
+   Selanjutnya, karena sudah pernah push, cukup jalankan `git push` setiap kali ingin push kerjaan ke branch kita di repository.
+
+[Kembali ke daftar isi](#daftar-isi)
+
+---
+
+### Cara membuka terminal baru
+
+1. Klik launch profile di sini:
+
+   ![Launch profile](./src/img/image-9.png)
+
+2. Klik **Git Bash**:
+
+   ![Pilih Git Bash](./src/img/image-10.png)
+
+   Setelah terminal git bash baru berhasil dibuat, akan muncul tampilan seperti ini:
+
+   ![Terminal git bash baru](./src/img/image-11.png)
+
+[Kembali ke daftar isi](#daftar-isi)
+
+---
+
+### Cara membuka directory
+
+Ketikkan:
+
+```bash
+cd nama-directory
+```
+
+Sebagai contoh, untuk membuka folder `Bengkel` di directory ClaimQ:
+
+```bash
+cd Bengkel
+```
+
+![Membuka directory](./src/img/image-13.png)
+
+[Kembali ke daftar isi](#daftar-isi)
+
+---
+
+### Cara matikan paksa terminal backend
+
+1. Cek dulu port apa saja yang sedang berjalan:
+
+   ```bash
+   netstat -ano | grep LISTENING | grep -E ":(8080|5173)"
+   ```
+
+   ![Daftar port yang berjalan](./src/img/image-15.png)
+
+   Akan muncul daftar port yang sedang berjalan.
+
+2. Matikan port tersebut dengan:
+
+   ```bash
+   taskkill //PID <nomor-pid> //F
+   ```
+
+   Ganti `<nomor-pid>` dengan angka di sebelah tulisan `LISTENING`.
+
+   ![taskkill berhasil](./src/img/image-16.png)
+
+   Setelah command berjalan, akan muncul pesan seperti:
+
+   ```
+   SUCCESS: The process with PID 16152 has been terminated.
+   ```
+
+[Kembali ke daftar isi](#daftar-isi)
+
+---
+
+### Kesimpulan
+
+1. Pembuatan branch backup setiap merging hanyalah pencegahan. Jika sudah yakin conflict saat merge tidak banyak (setiap merge pasti ada conflict), silakan langsung merge dari branch utama ke branch masing-masing fitur.
+
+2. Proses merge yang dijelaskan di sini masih butuh banyak penyempurnaan. Nantinya akan ada tahap di mana merge ke branch utama harus melalui **pull request** terlebih dahulu, yang akan dipelajari lebih dalam. Jika ada yang sudah tahu cara membuat pull request atau cara merge yang lebih simpel, silakan infokan. Boleh juga langsung buat branch baru, lalu infokan ke saya agar di-merge ke branch master. Terima kasih!
