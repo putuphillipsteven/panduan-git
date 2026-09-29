@@ -13,6 +13,7 @@
     - [Cara membuat branch baru](#cara-membuat-branch-baru)
     - [Cara menjalankan aplikasi](#cara-menjalankan-aplikasi)
       - [Menjalankan Back End](#menjalankan-back-end)
+      - [Cara matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend)
       - [Menjalankan Front End](#menjalankan-front-end)
     - [Cara merge branch](#cara-merge-branch)
     - [Cara merge kerjaan kita ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
@@ -20,7 +21,6 @@
     - [Cara push kerjaan kita dari local ke branch kita di repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
     - [Cara membuka terminal baru](#cara-membuka-terminal-baru)
     - [Cara membuka directory](#cara-membuka-directory)
-    - [Cara matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend)
     - [Kesimpulan](#kesimpulan)
 
 ---
@@ -142,6 +142,37 @@ Untuk menjalankan aplikasi, kita harus menjalankan [backend](#menjalankan-back-e
 5. Jika muncul pesan bahwa ada port backend lain yang sedang berjalan, silakan [matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend).
 
 [Kembali ke daftar isi](#daftar-isi)
+
+#### Cara matikan paksa terminal backend
+
+1. Cek dulu port apa saja yang sedang berjalan:
+
+   ```bash
+   netstat -ano | grep LISTENING | grep -E ":(8080|5173)"
+   ```
+
+   ![Daftar port yang berjalan](./src/img/image-15.png)
+
+   Akan muncul daftar port yang sedang berjalan.
+
+2. Matikan port tersebut dengan:
+
+   ```bash
+   taskkill //PID <nomor-pid> //F
+   ```
+
+   Ganti `<nomor-pid>` dengan angka di sebelah tulisan `LISTENING`.
+
+   ![taskkill berhasil](./src/img/image-16.png)
+
+   Setelah command berjalan, akan muncul pesan seperti:
+
+   ```
+   SUCCESS: The process with PID 16152 has been terminated.
+   ```
+
+[Kembali ke daftar isi](#daftar-isi)
+
 
 #### Menjalankan Front End
 
@@ -265,7 +296,7 @@ Selesaikan conflict yang terjadi(jika ada), lalu jangan lupa di [push kembali](#
 
 ![alt text](./src/img/pull-request.png)
 
-6. Pada 
+6. Terdapat dua pilihan, base, ntar ya, dokumentasi belum lengkap
 
 ![alt text](image.png)
 
@@ -362,37 +393,7 @@ cd Bengkel
 
 ---
 
-### Cara matikan paksa terminal backend
 
-1. Cek dulu port apa saja yang sedang berjalan:
-
-   ```bash
-   netstat -ano | grep LISTENING | grep -E ":(8080|5173)"
-   ```
-
-   ![Daftar port yang berjalan](./src/img/image-15.png)
-
-   Akan muncul daftar port yang sedang berjalan.
-
-2. Matikan port tersebut dengan:
-
-   ```bash
-   taskkill //PID <nomor-pid> //F
-   ```
-
-   Ganti `<nomor-pid>` dengan angka di sebelah tulisan `LISTENING`.
-
-   ![taskkill berhasil](./src/img/image-16.png)
-
-   Setelah command berjalan, akan muncul pesan seperti:
-
-   ```
-   SUCCESS: The process with PID 16152 has been terminated.
-   ```
-
-[Kembali ke daftar isi](#daftar-isi)
-
----
 
 ### Kesimpulan
 
