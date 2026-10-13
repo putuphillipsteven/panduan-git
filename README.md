@@ -433,6 +433,8 @@ npm run format
 
 git add -A && git commit
 
+git config core.hooksPath .githooks
+
 git status
 
 git rm --cached -r -q . && git reset --hard
