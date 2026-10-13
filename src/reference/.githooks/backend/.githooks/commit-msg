@@ -1,0 +1,22 @@
+#!/bin/sh
+# Q363 (amendemen 12 Okt 2026) — judul pesan commit minimal 3 karakter.
+#
+# - Baris pertama (judul) minimal 3 karakter: "ok" ditolak.
+# - Pesan bawaan git untuk merge/revert dan fixup!/squash! tidak diperiksa.
+# Aktifkan sekali per clone: git config core.hooksPath .githooks
+
+set -eu
+
+# Baris komentar (#) dibuang git setelah hook ini, jadi ikut diabaikan di sini.
+pesan=$(tr -d '\r' <"$1" | grep -v '^#' || true)
+judul=$(printf '%s\n' "$pesan" | grep -v '^[[:space:]]*$' | head -n 1 || true)
+
+case "$judul" in
+"Merge "* | "Revert "* | "fixup! "* | "squash! "* | "amend! "*) exit 0 ;;
+esac
+
+# Pesan dari developer (12 Okt 2026), ditampilkan apa adanya.
+if [ "${#judul}" -lt 3 ]; then
+	echo "commit-msg: DITOLAK — Jangan pendek kali commit message itu ya :)" >&2
+	exit 1
+fi

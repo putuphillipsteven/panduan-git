@@ -1,6 +1,6 @@
 # Panduan Git
 
-## Perjanjian Baru
+## Perjanjian Lama
 
 ### Daftar Isi
 
@@ -22,6 +22,10 @@
     - [Cara membuka terminal baru](#cara-membuka-terminal-baru)
     - [Cara membuka directory](#cara-membuka-directory)
     - [Kesimpulan](#kesimpulan)
+
+## Perjanjian Baru
+
+### Daftar Isi
 
 ---
 
@@ -65,7 +69,7 @@ Misalnya developer A mendapat tugas mengerjakan fitur dashboard testing. Apa yan
 
 1. Membuat branch baru dengan nama `feat/dashboard-testing`.
 
-   Kenapa `feat/dashboard-testing`? Karena tim ClaimQ telah menyetujui rule penamaan branch ini. `feat` adalah singkatan dari *feature*. Nantinya akan ada rule penamaan lain, namun karena ini migrasi, kita anggap semuanya adalah fitur. Lihat [cara membuat branch baru](#cara-membuat-branch-baru).
+   Kenapa `feat/dashboard-testing`? Karena tim ClaimQ telah menyetujui rule penamaan branch ini. `feat` adalah singkatan dari _feature_. Nantinya akan ada rule penamaan lain, namun karena ini migrasi, kita anggap semuanya adalah fitur. Lihat [cara membuat branch baru](#cara-membuat-branch-baru).
 
 2. Setelah developer A mengerjakan semua fiturnya, ia harus [push kerjaannya](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository) ke branch dia sendiri.
 
@@ -173,7 +177,6 @@ Untuk menjalankan aplikasi, kita harus menjalankan [backend](#menjalankan-back-e
 
 [Kembali ke daftar isi](#daftar-isi)
 
-
 #### Menjalankan Front End
 
 1. [Buka terminal](#cara-membuka-terminal-baru) git bash baru di VS Code.
@@ -276,11 +279,14 @@ Cara menggabungkan kerjaan dari branch masing-masing ke branch utama (dalam cont
 ### Cara merge kerjaan ke branch utama v2
 
 1. Kita pastikan kerjaan di branch fitur kita sudah di [push semua](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository).
-2. Setelah itu, kita langsung 
+2. Setelah itu, kita langsung
+
 ```bash
 git pull origin <nama branch yang nantinya akan kita merge>
 ```
-Contoh : 
+
+Contoh :
+
 ```bash
 git pull origin dev
 ```
@@ -299,7 +305,6 @@ Selesaikan conflict yang terjadi(jika ada), lalu jangan lupa di [push kembali](#
 6. Terdapat dua pilihan, base, ntar ya, dokumentasi belum lengkap
 
 ![alt text](image.png)
-
 
 [Kembali ke daftar isi](#daftar-isi)
 
@@ -392,8 +397,6 @@ cd Bengkel
 [Kembali ke daftar isi](#daftar-isi)
 
 ---
-
-
 
 ### Kesimpulan
 

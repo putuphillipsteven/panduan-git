@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash|PowerShell|EnterWorktree",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/claim-q-context/.claude/hooks/jaga-branch.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
