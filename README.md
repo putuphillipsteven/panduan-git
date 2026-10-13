@@ -443,28 +443,29 @@ git push
 ### Setup Claude Terminal
 
 1. Klik `New Terminal Window` vscode
-   ![alt text](image-1.png)
+   ![alt text](./src/img/gl-image-1.png)
 2. Pastikan yang terbuka adalah powershell(katanya sih lebih compatible powershell)
-   ![alt text](image-2.png)
+   ![alt text](./src/img/gl-image-2.png)
 3. Ketikkan claude, lalu enter
-   ![alt text](image-3.png)
+   ![alt text](./src/img/gl-image-3.png)
 4. Disini, kita bisa ngeprompt kayak biasa, cuman kayanya lebih hemat token (menurut kepercayaan kami :))
-   ![alt text](image-4.png)
+
+   ![alt text](./src/img/gl-.png)
 
 Bedanya, kalau mau ngeprompt panjang, disarankan pakai notepad saja. Gimana cara buka notepad? Kita harus set dulu settingan kita dengan cara :
 
 - Shortcut `ctrl+shift+p` di vscode, lalu masukkan `Preferences: Open User Settings (JSON)`
-  ![alt text](image-5.png)
+  ![alt text](./src/img/gl-image-5.png)
 - Tambahkan `"terminal.integrated.sendKeybindingsToShell": true,` kedalam JSONnya, lalu save
-  ![alt text](image-6.png)
+  ![alt text](./src/img/gl-image-6.png)
 
 Jika sudah setting, maka kita bisa langsung jalankan shortcut `ctrl+g` pada claude yang ada diterminal, maka akan langsung membuka notepad baru.
 
-![alt text](image-7.png)
+![alt text](./src/img/gl-image-7.png)
 
 Kalau notepad nya kita simpan lalu tutup, maka textnya akan muncul di claude terminal, tinggal kita jalanin aja promptnya
 
-![alt text](image-8.png)
+![alt text](./src/img/gl-image-8.png)
 
 ---
 
