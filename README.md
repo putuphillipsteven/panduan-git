@@ -4,28 +4,27 @@
 
 ### Daftar Isi
 
-- [Panduan Git](#panduan-git)
-  - [Perjanjian Baru](#perjanjian-baru)
-    - [Daftar Isi](#daftar-isi)
-    - [Repository](#repository)
-    - [Cara clone repository](#cara-clone-repository)
-    - [Branch](#branch)
-    - [Cara membuat branch baru](#cara-membuat-branch-baru)
-    - [Cara menjalankan aplikasi](#cara-menjalankan-aplikasi)
-      - [Menjalankan Back End](#menjalankan-back-end)
-      - [Cara matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend)
-      - [Menjalankan Front End](#menjalankan-front-end)
-    - [Cara merge branch](#cara-merge-branch)
-    - [Cara merge kerjaan kita ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
-    - [Cara merge kerjaan ke branch utama v2](#cara-merge-kerjaan-ke-branch-utama-v2)
-    - [Cara push kerjaan kita dari local ke branch kita di repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
-    - [Cara membuka terminal baru](#cara-membuka-terminal-baru)
-    - [Cara membuka directory](#cara-membuka-directory)
-    - [Kesimpulan](#kesimpulan)
+- [Repository](#repository)
+- [Cara clone repository](#cara-clone-repository)
+- [Branch](#branch)
+- [Cara membuat branch baru](#cara-membuat-branch-baru)
+- [Cara menjalankan aplikasi](#cara-menjalankan-aplikasi)
+  - [Menjalankan Back End](#menjalankan-back-end)
+  - [Cara matikan paksa terminal backend](#cara-matikan-paksa-terminal-backend)
+  - [Menjalankan Front End](#menjalankan-front-end)
+- [Cara merge branch](#cara-merge-branch)
+- [Cara merge kerjaan kita ke branch utama](#cara-merge-kerjaan-kita-ke-branch-utama)
+- [Cara merge kerjaan ke branch utama v2](#cara-merge-kerjaan-ke-branch-utama-v2)
+- [Cara push kerjaan kita dari local ke branch kita di repository](#cara-push-kerjaan-kita-dari-local-ke-branch-kita-di-repository)
+- [Cara membuka terminal baru](#cara-membuka-terminal-baru)
+- [Cara membuka directory](#cara-membuka-directory)
+- [Kesimpulan](#kesimpulan)
 
 ## Perjanjian Baru
 
 ### Daftar Isi
+
+- [Setup Gitlab](#setup-gitlab)
 
 ---
 
@@ -395,6 +394,50 @@ cd Bengkel
 ![Membuka directory](./src/img/image-13.png)
 
 [Kembali ke daftar isi](#daftar-isi)
+
+### Setup Gitlab
+
+1. Clone repository backend, frontend, dan context didalam folder gitlab(ini di pc masing2 ya)
+
+![alt text](./src/img/directory.jpeg)
+
+2. Masing2 developer wajib download folder CLAUDE.md yang ada di `src\reference\.md\CLAUDE.md`, ini ditarok didirectory gitlab, setara dengan folder backend, frontend, dan context.
+
+![alt text](./src/img/claude-example.png)
+
+3. `(optional, ini jika project yang dikerjakan wajib grilling di setiap sesi)` Buka claude dari terminal di directory gitlab(bukan di directory salah satu repo) Jalankan command /plugin install mattpocock-skills@claude-plugins-official
+
+4. `Backend` (buka Git Bash di directory backend), lalu jalankan command
+
+```bash
+gofmt -w .
+
+git add -A && git commit
+
+git config core.hooksPath .githooks
+
+git status
+
+git rm --cached -r -q . && git reset --hard
+
+git push
+```
+
+5. `Frontend` (buka Git Bash di directory frontend), lalu jalankan command
+
+```bash
+npm install
+
+npm run format
+
+git add -A && git commit
+
+git status
+
+git rm --cached -r -q . && git reset --hard
+
+git push
+```
 
 ---
 
