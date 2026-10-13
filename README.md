@@ -25,6 +25,7 @@
 ### Daftar Isi
 
 - [Setup Gitlab](#setup-gitlab)
+- [Setup Claude Terminal](#setup-claude-terminal)
 
 ---
 
@@ -438,6 +439,8 @@ git rm --cached -r -q . && git reset --hard
 
 git push
 ```
+
+### Setup Claude Terminal
 
 ---
 
