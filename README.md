@@ -511,7 +511,7 @@ Ternyata, best practice untuk push itu adalah `git push origin <nama-branch-mu>`
 Secara logic, kalau dev-backup aman masuk ke branch kamu, hasil gabungan branch kamu dan dev-backup juga aman masuk ke dev-backup.
 
 ```bash
-git pull --no-rebase --no-commit origin <backup>
+git pull --no-rebase --no-commit origin <dev-backup-*>
 ```
 
 Kenapa pakai dua flag `--no-rebase --no-commit` ini:
@@ -546,8 +546,8 @@ git push origin <nama-branch-mu>
 ##### Pindah ke dev-backup dan ambil data yang terbaru di remote dev-backup
 
 ```bash
-git checkout <backup>
-git pull --no-rebase --no-commit origin <backup>
+git checkout <dev-backup-*>
+git pull --no-rebase --no-commit origin <dev-backup-*>
 ```
 
 ##### Ambil code dari branch mu ke dev-backup
@@ -569,7 +569,7 @@ Sama kayak langkah [jalankan backend dan frontend](#jalankan-backend-dan-fronten
 ```bash
 git add .
 git commit -m "message"
-git push origin <nama-branch-mu>
+git push origin <dev-backup-*>
 ```
 
 #### Haram untuk dilakukan
