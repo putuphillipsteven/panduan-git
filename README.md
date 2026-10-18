@@ -26,6 +26,19 @@
 
 - [Setup Gitlab](#setup-gitlab)
 - [Setup Claude Terminal](#setup-claude-terminal)
+- [Flow merge ke dev-backup](#flow-merge-ke-dev-backup)
+  - [Di branch sendiri](#di-branch-sendiri)
+    - [Push kerjaan dulu](#push-kerjaan-dulu)
+    - [Tarik dev-backup ke branch sendiri](#tarik-dev-backup-ke-branch-sendiri)
+    - [Jalankan backend dan frontend](#jalankan-backend-dan-frontend)
+    - [Kalau aman, commit dan push ke branch sendiri](#kalau-aman-commit-dan-push-ke-branch-sendiri)
+  - [Di dev-backup](#di-dev-backup)
+    - [Pindah ke dev-backup dan ambil data yang terbaru di remote dev-backup](#pindah-ke-dev-backup-dan-ambil-data-yang-terbaru-di-remote-dev-backup)
+    - [Ambil code dari branch mu ke dev-backup](#ambil-code-dari-branch-mu-ke-dev-backup)
+    - [Jalankan backend dan frontend lagi](#jalankan-backend-dan-frontend-lagi)
+    - [Kalau aman, commit dan push ke dev-backup](#kalau-aman-commit-dan-push-ke-dev-backup)
+  - [Haram untuk dilakukan](#haram-untuk-dilakukan)
+  - [Step setelah semua kerjaan di merge ke dev-backup](#step-setelah-semua-kerjaan-di-merge-ke-dev-backup)
 
 ---
 
@@ -468,6 +481,109 @@ Jika sudah setting, maka kita bisa langsung jalankan shortcut `ctrl+g` pada clau
 Kalau notepad nya kita simpan lalu tutup, maka textnya akan muncul di claude terminal, tinggal kita jalanin aja promptnya
 
 ![alt text](./src/img/gl-image-8.png)
+
+---
+
+### Flow merge ke dev-backup
+
+`Jika ada proses merge yang lebih simple dan gacor, tolong diinfokan ya ges.`
+
+Step dibawah ini wajib dijalankan setiap kali kerjaan di branch masing2 developer akan digabung ke `dev-backup-*`. Simplenya, mau merge kerjaan masing2 developer ke branch dev-backup.
+
+Ada dua step: ambil code terbaru dari dev-backup ke branch masing2 dulu.
+
+#### Di branch sendiri
+
+##### Push kerjaan dulu
+
+Pastiin udah di branch sendiri(yang bukan backup, apalagi dev ataupun live), push semua kerjaan yang udah selesai di local. Ini buat checkpoint, buat balik kalau nanti ada yang berantakan.
+
+```bash
+git add .
+git commit -m "message"
+git push origin <nama-branch-mu>
+```
+
+Ternyata, best practice untuk push itu adalah `git push origin <nama-branch-mu>` ya ges, dengan ini, harusnya kalo ada branch pertama kali yang baru dibuat, ga perlu --set-upstream lagi
+
+##### Tarik dev-backup ke branch sendiri
+
+Secara logic, kalau dev-backup aman masuk ke branch kamu, hasil gabungan branch kamu dan dev-backup juga aman masuk ke dev-backup.
+
+```bash
+git pull --no-rebase --no-commit origin <backup>
+```
+
+Kenapa pakai dua flag `--no-rebase --no-commit` ini:
+
+- `--no-rebase` — aku pun masih ga terlalu paham soal rebase, tapi, sepemahamanku, rebase itu bisa ngerubah hash dicommit kita, jadi ntar history commit kita yang di local sama di repo bisa beda, bisa buat git bingung.
+- `--no-commit` — hasil merge **ditahan dulu, belum jadi commit**. Jadi sempat solve conflict dan cek aplikasi jalan ato nggak sebelum merge-nya masuk history.
+
+Kalau konflik, beresin di sini, jangan di dev-backup. Kalau berantakan, dan mentok, batalin aja pakai `git merge --abort`.
+
+##### Jalankan backend dan frontend
+
+Dua-duanya wajib jalan. Buka juga page yang kena perubahan, test test semua fitur ya, jangan cuma lihat run app nya lolos. Caranya ada di [menjalankan back end](#menjalankan-back-end) dan [menjalankan front end](#menjalankan-front-end).
+
+```bash
+# backend (dari directory backend)
+CLAIMQ_ENV=DEV go run ./cmd/claimq
+
+# frontend (dari directory frontend)
+npm run dev
+```
+
+##### Kalau aman, commit dan push ke branch sendiri
+
+```bash
+git add .
+git commit -m "message"
+git push origin <nama-branch-mu>
+```
+
+#### Di dev-backup
+
+##### Pindah ke dev-backup dan ambil data yang terbaru di remote dev-backup
+
+```bash
+git checkout <backup>
+git pull --no-rebase --no-commit origin <backup>
+```
+
+##### Ambil code dari branch mu ke dev-backup
+
+```bash
+git pull --no-rebase --no-commit origin <nama-branch-mu>
+```
+
+Harusnya langsung `Fast-forward`, karena branch kamu udah berisi dev-backup dari langkah [tarik dev-backup ke branch sendiri](#tarik-dev-backup-ke-branch-sendiri).
+
+Kalau malah konflik, berarti ada yang push ke dev-backup duluan. Jalankan `git merge --abort`, balik ke branch kamu, ulang dari langkah [tarik dev-backup ke branch sendiri](#tarik-dev-backup-ke-branch-sendiri).
+
+##### Jalankan backend dan frontend lagi
+
+Sama kayak langkah [jalankan backend dan frontend](#jalankan-backend-dan-frontend).
+
+##### Kalau aman, commit dan push ke dev-backup
+
+```bash
+git add .
+git commit -m "message"
+git push origin <nama-branch-mu>
+```
+
+#### Haram untuk dilakukan
+
+- Jangan `git push --force` ke dev-backup. Kerjaan orang lain bisa hilang(kecuali salah push, revert habis itu push --force boleh).
+- Jangan beresin konflik di dev-backup. Beresin di branch sendiri (langkah [tarik dev-backup ke branch sendiri](#tarik-dev-backup-ke-branch-sendiri)).
+
+#### Step setelah semua kerjaan di merge ke dev-backup
+
+`dev-backup-*` → `dev` → `live` lewat merge request di GitLab.
+
+Merge request di gitlab bisa dilakuin kalo pipeline gak error, kalo error gas pake [cara tadi](#flow-merge-ke-dev-backup), tinggal nama branch nya aja diganti ganti. Dev-backup tarik dev dulu, baru checkout ke dev, tarik lagi hasil dev-backupnya.
+
+[Kembali ke daftar isi](#daftar-isi-1)
 
 ---
 
